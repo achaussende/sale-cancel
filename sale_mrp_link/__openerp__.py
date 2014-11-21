@@ -32,6 +32,7 @@
     'depends': ['sale_stock', 'mrp'],
     'data': [
         'mrp_view.xml',
+        'sale_view.xml',
         ],
     'installable': True,
     'auto_install': False,

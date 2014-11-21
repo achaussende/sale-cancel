@@ -32,6 +32,7 @@
     'depends': ['procurement'],
     'data': [
         'purchase_view.xml',
+        'sale_view.xml',
         ],
     'installable': True,
     'auto_install': False,
