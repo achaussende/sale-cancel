@@ -27,21 +27,24 @@ class SaleOrder(orm.Model):
                     cancel = False
                     log = _("Can't cancel picking out: %s")
                 log %= picking.name
-                order.add_logs(log)
+                order.add_logs(log, cancel)
             if cancel:
                 cancel_ids.append(order.id)
         return super(SaleOrder, self).action_cancel(
             cr, uid, cancel_ids, context=context
         )
 
-    def add_logs(self, cr, uid, ids, log_message, context=None):
+    def add_logs(self, cr, uid, ids, log_message, success, context=None):
         for order in self.browse(cr, uid, ids, context=context):
             if order.cancel_logs:
                 logs = order.cancel_logs
             else:
                 logs = ""
-            logs += '<p>%s</p>' % log_message
-            order.write({'cancel_logs': logs})
+            if success:
+                logs += '<p>%s</p>'
+            else:
+                logs += '<p style="color: red">%s</p>'
+            order.write({'cancel_logs': logs % log_message})
 
     _columns = {
         'cancel_logs': fields.html("Cancellation Logs"),

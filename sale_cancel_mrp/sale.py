@@ -31,7 +31,7 @@ class SaleOrder(orm.Model):
                     cancel = False
                     log = _("Can't cancel int picking on MO %s: %s")
                 log %= (mo.name, mo.picking_id.name)
-                order.add_logs(log)
+                order.add_logs(log, cancel)
                 if mo.state in ['draft', 'confirmed', 'ready']:
                     mo.action_cancel()
                     log = _("MO %s canceled")
@@ -39,6 +39,7 @@ class SaleOrder(orm.Model):
                     cancel = False
                     log = _("Can't cancel MO: %s")
                 log %= mo.name
+                order.add_logs(log, cancel)
             if cancel:
                 cancel_ids.append(order.id)
         return super(SaleOrder, self).action_cancel(

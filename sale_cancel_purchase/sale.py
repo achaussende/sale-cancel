@@ -24,12 +24,11 @@ class SaleOrder(orm.Model):
                 cr, uid, [('sale_order_id', '=', order.id)], context=context
             )
             cancel = True
+            line_to_cancel = []
             for po_line in po_line_obj.browse(cr, uid, po_line_ids,
                                               context=context):
                 if po_line.state in ['draft']:
-                    po_line_obj.unlink(cr, uid, [po_line.id], context=context)
-                    log_line = _("Number of deleted lines in Purchase Order: "
-                                 "%s") % len(po_line_ids)
+                    line_to_cancel.append(po_line.id)
                     picking_ids = picking_obj.search(
                         cr, uid, [('purchase_id', '=', po_line.order_id.id)],
                         context=context
@@ -43,13 +42,17 @@ class SaleOrder(orm.Model):
                             cancel = False
                             log = _("Can't cancel picking in: %s")
                         log %= picking.name
-                        order.add_logs(log)
+                        order.add_logs(log, cancel)
                 else:
-                    cancel = False
-                    log_line = _("Impossible to cancel Purchase Order Line for"
-                                 "product %s because Line's state is in %s")
-                    log_line %= (po_line.product_id.name, po_line.state)
-                order.add_logs(log_line)
+                    log = _("Impossible to cancel Purchase Order Line for"
+                            " product %s because Line's state is in %s")
+                    log %= (po_line.product_id.name, po_line.state)
+                    order.add_logs(log, False)
+            if line_to_cancel:
+                po_line_obj.unlink(cr, uid, line_to_cancel, context=context)
+                log = _("Number of deleted lines in Purchase Order: "
+                        "%s") % len(po_line_ids)
+                order.add_logs(log, True)
             if cancel:
                 cancel_ids.append(order.id)
         return super(SaleOrder, self).action_cancel(
