@@ -18,25 +18,25 @@ msgstr ""
 #. module: sale_cancel_mrp
 #: code:addons/sale_cancel_mrp/sale.py:40
 #, python-format
-msgid "<p>Can't cancel MO: %s"
+msgid "Can't cancel MO: %s"
 msgstr ""
 
 #. module: sale_cancel_mrp
 #: code:addons/sale_cancel_mrp/sale.py:32
 #, python-format
-msgid "<p>Can't cancel int picking on MO %s: %s</p>"
+msgid "Can't cancel int picking on MO %s: %s"
 msgstr ""
 
 #. module: sale_cancel_mrp
 #: code:addons/sale_cancel_mrp/sale.py:29
 #, python-format
-msgid "<p>Canceled int picking on MO %s: %s</p>"
+msgid "Canceled int picking on MO %s: %s"
 msgstr ""
 
 #. module: sale_cancel_mrp
 #: code:addons/sale_cancel_mrp/sale.py:37
 #, python-format
-msgid "<p>MO %s canceled</p>"
+msgid "MO %s canceled"
 msgstr ""
 
 #. module: sale_cancel_mrp

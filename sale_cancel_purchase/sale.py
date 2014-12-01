@@ -28,8 +28,8 @@ class SaleOrder(orm.Model):
                                               context=context):
                 if po_line.state in ['draft']:
                     po_line_obj.unlink(cr, uid, [po_line.id], context=context)
-                    log_line = _("<p>Number of deleted lines in Purchase "
-                                 "Order: %s</p>") % len(po_line_ids)
+                    log_line = _("Number of deleted lines in Purchase Order: "
+                                 "%s") % len(po_line_ids)
                     picking_ids = picking_obj.search(
                         cr, uid, [('purchase_id', '=', po_line.order_id.id)],
                         context=context
@@ -38,17 +38,16 @@ class SaleOrder(orm.Model):
                                                       context=context):
                         if picking.state in ['assigned', 'confirmed', 'draft']:
                             picking.action_cancel()
-                            log = _("<p>Canceled picking in: %s</p>")
+                            log = _("Canceled picking in: %s")
                         else:
                             cancel = False
-                            log = _("<p>Can't cancel picking in: %s</p>")
+                            log = _("Can't cancel picking in: %s")
                         log %= picking.name
                         order.add_logs(log)
                 else:
                     cancel = False
-                    log_line = _("<p>Impossible to cancel Purchase Order Line "
-                                 "for product %s because Line's state is in %s"
-                                 "</p>")
+                    log_line = _("Impossible to cancel Purchase Order Line for"
+                                 "product %s because Line's state is in %s")
                     log_line %= (po_line.product_id.name, po_line.state)
                 order.add_logs(log_line)
             if cancel:

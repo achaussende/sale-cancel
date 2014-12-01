@@ -18,25 +18,25 @@ msgstr ""
 #. module: sale_cancel_purchase
 #: code:addons/sale_cancel_purchase/sale.py:44
 #, python-format
-msgid "<p>Can't cancel picking in: %s</p>"
+msgid "Can't cancel picking in: %s"
 msgstr ""
 
 #. module: sale_cancel_purchase
 #: code:addons/sale_cancel_purchase/sale.py:41
 #, python-format
-msgid "<p>Canceled picking in: %s</p>"
+msgid "Canceled picking in: %s"
 msgstr ""
 
 #. module: sale_cancel_purchase
 #: code:addons/sale_cancel_purchase/sale.py:49
 #, python-format
-msgid "<p>Impossible to cancel Purchase Order Line for product %s because Line's state is in %s</p>"
+msgid "Impossible to cancel Purchase Order Line for product %s because Line's state is in %s"
 msgstr ""
 
 #. module: sale_cancel_purchase
 #: code:addons/sale_cancel_purchase/sale.py:31
 #, python-format
-msgid "<p>Number of deleted lines in Purchase Order: %s</p>"
+msgid "Number of deleted lines in Purchase Order: %s"
 msgstr ""
 
 #. module: sale_cancel_purchase

@@ -22,10 +22,10 @@ class SaleOrder(orm.Model):
             for picking in order.picking_ids:
                 if picking.state in ['assigned', 'confirmed', 'draft']:
                     picking.action_cancel()
-                    log = _("<p>Canceled picking out: %s</p>")
+                    log = _("Canceled picking out: %s")
                 else:
                     cancel = False
-                    log = _("<p>Can't cancel picking out: %s</p>")
+                    log = _("Can't cancel picking out: %s")
                 log %= picking.name
                 order.add_logs(log)
             if cancel:
@@ -40,7 +40,7 @@ class SaleOrder(orm.Model):
                 logs = order.cancel_logs
             else:
                 logs = ""
-            logs += '%s\n' % log_message
+            logs += '<p>%s</p>' % log_message
             order.write({'cancel_logs': logs})
 
     _columns = {
